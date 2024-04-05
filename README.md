@@ -5,3 +5,6 @@
 
 ### Even Number Game
 [![asciicast](https://asciinema.org/a/SY3CZf2c1HxfD1El9Gf7Yftct.svg)](https://asciinema.org/a/SY3CZf2c1HxfD1El9Gf7Yftct)
+
+### Calculator Game
+[![asciicast](https://asciinema.org/a/qmXfIk25ln7YzqS84tCZjRZ0i.svg)](https://asciinema.org/a/qmXfIk25ln7YzqS84tCZjRZ0i)
