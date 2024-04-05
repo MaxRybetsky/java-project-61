@@ -1,9 +1,8 @@
 package hexlet.code.games;
 
+import hexlet.code.AnswerValidator;
 import hexlet.code.Game;
 import hexlet.code.RandomGenerator;
-
-import java.util.Scanner;
 
 public class EvenNumberGame implements Game {
     private static final String EVEN_GAME_RULES = "Answer 'yes' if the number is even, otherwise answer 'no'.";
@@ -26,22 +25,11 @@ public class EvenNumberGame implements Game {
         var givenNumber = getNumberForQuestion();
         var correctAnswer = calculateCorrectAnswer(givenNumber);
 
-        System.out.printf(QUESTION_TEMPLATE, givenNumber);
-
-        var answer = getUserAnswer();
-
-        if (correctAnswer.equals(answer)) {
-            System.out.println(CORRECT_ANSWER_MESSAGE);
-            return true;
-        } else {
-            System.out.printf(WRONG_ANSWER_MESSAGE_TEMPLATE, answer, correctAnswer, userName);
-            return false;
-        }
-    }
-
-    private String getUserAnswer() {
-        var sc = new Scanner(System.in);
-        return sc.nextLine();
+        return AnswerValidator.askAndValidateStringAnswer(
+                String.valueOf(givenNumber),
+                correctAnswer,
+                userName
+        );
     }
 
     private String calculateCorrectAnswer(int givenNumber) {

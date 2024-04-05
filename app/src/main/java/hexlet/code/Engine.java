@@ -2,6 +2,7 @@ package hexlet.code;
 
 import hexlet.code.games.CalculatorGame;
 import hexlet.code.games.EvenNumberGame;
+import hexlet.code.games.GreatestCommonDivisorGame;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -17,6 +18,7 @@ public class Engine {
         "1 - Greet",
         "2 - Even",
         "3 - Calc",
+        "4 - GCD",
         "0 - Exit"
     };
 
@@ -85,6 +87,9 @@ public class Engine {
             }
             case 3 -> {
                 return new CalculatorGame(userName);
+            }
+            case 4 -> {
+                return new GreatestCommonDivisorGame(userName);
             }
             default -> {
                 return null;

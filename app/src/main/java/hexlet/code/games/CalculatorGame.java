@@ -1,9 +1,8 @@
 package hexlet.code.games;
 
+import hexlet.code.AnswerValidator;
 import hexlet.code.Game;
 import hexlet.code.RandomGenerator;
-
-import java.util.Scanner;
 
 public class CalculatorGame implements Game {
     private static final String CALCULATOR_GAME_RULES = "What is the result of the expression?";
@@ -34,17 +33,8 @@ public class CalculatorGame implements Game {
         var correctAnswer = calculateCorrectAnswer(operation, firstOperand, secondOperand);
 
         var question = buildStringExpression(firstOperand, operation, secondOperand);
-        System.out.printf(QUESTION_TEMPLATE, question);
 
-        var answer = getUserAnswer();
-
-        if (correctAnswer == answer) {
-            System.out.println(CORRECT_ANSWER_MESSAGE);
-            return true;
-        } else {
-            System.out.printf(WRONG_ANSWER_MESSAGE_TEMPLATE, answer, correctAnswer, userName);
-            return false;
-        }
+        return AnswerValidator.askAndValidateIntegerAnswer(question, correctAnswer, userName);
     }
 
     private String buildStringExpression(int first, String operation, int second) {
@@ -72,10 +62,5 @@ public class CalculatorGame implements Game {
 
     private int generateInt() {
         return RandomGenerator.generateInteger();
-    }
-
-    private int getUserAnswer() {
-        var sc = new Scanner(System.in);
-        return sc.nextInt();
     }
 }
