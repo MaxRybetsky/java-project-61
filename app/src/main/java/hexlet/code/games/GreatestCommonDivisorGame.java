@@ -25,7 +25,7 @@ public class GreatestCommonDivisorGame implements Game {
 
         var correctAnswer = calculateGcdOf(firstNumber, secondNumber);
 
-        var question = buildStringExpression(firstNumber, secondNumber);
+        var question = buildStringQuestion(firstNumber, secondNumber);
 
         return AnswerValidator.askAndValidateIntegerAnswer(question, correctAnswer, userName);
     }
@@ -45,7 +45,7 @@ public class GreatestCommonDivisorGame implements Game {
         return result;
     }
 
-    private String buildStringExpression(int first, int second) {
+    private String buildStringQuestion(int first, int second) {
         return first + " " + second;
     }
 

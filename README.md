@@ -11,3 +11,6 @@
 
 ### GCD Game
 [![asciicast](https://asciinema.org/a/9RTmqLckZ5lYBCn62FB7acA5a.svg)](https://asciinema.org/a/9RTmqLckZ5lYBCn62FB7acA5a)
+
+### Arithmetic Progression Game
+[![asciicast](https://asciinema.org/a/I1aI5mMYVJSWMUy09JOeBl6xT.svg)](https://asciinema.org/a/I1aI5mMYVJSWMUy09JOeBl6xT)

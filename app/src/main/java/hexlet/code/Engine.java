@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.games.ArithmeticProgressionGame;
 import hexlet.code.games.CalculatorGame;
 import hexlet.code.games.EvenNumberGame;
 import hexlet.code.games.GreatestCommonDivisorGame;
@@ -19,6 +20,7 @@ public class Engine {
         "2 - Even",
         "3 - Calc",
         "4 - GCD",
+        "5 - Progression",
         "0 - Exit"
     };
 
@@ -90,6 +92,9 @@ public class Engine {
             }
             case 4 -> {
                 return new GreatestCommonDivisorGame(userName);
+            }
+            case 5 -> {
+                return new ArithmeticProgressionGame(userName);
             }
             default -> {
                 return null;
