@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Engine {
     private static final String ENTER_GAME_NUMBER_MESSAGE = "Please enter the game number and press Enter.";
-    private static final String CHOICE_MESSAGE = "Please enter the game number and press Enter.";
+    private static final String CHOICE_MESSAGE = "Your choice: ";
     private static final String CONGRATULATIONS_TEMPLATE = "Congratulations, %s!\n";
 
     private static final int NUMBER_OF_ROUNDS = 3;
@@ -75,7 +75,7 @@ public class Engine {
             System.out.println(option);
         }
 
-        System.out.println(CHOICE_MESSAGE);
+        System.out.print(CHOICE_MESSAGE);
     }
 
     private static int scanChosenOptionNumber() {
