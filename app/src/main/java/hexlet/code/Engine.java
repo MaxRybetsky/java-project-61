@@ -4,6 +4,7 @@ import hexlet.code.games.ArithmeticProgressionGame;
 import hexlet.code.games.CalculatorGame;
 import hexlet.code.games.EvenNumberGame;
 import hexlet.code.games.GreatestCommonDivisorGame;
+import hexlet.code.games.PrimeNumberGame;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -21,6 +22,7 @@ public class Engine {
         "3 - Calc",
         "4 - GCD",
         "5 - Progression",
+        "6 - Prime",
         "0 - Exit"
     };
 
@@ -95,6 +97,9 @@ public class Engine {
             }
             case 5 -> {
                 return new ArithmeticProgressionGame(userName);
+            }
+            case 6 -> {
+                return new PrimeNumberGame(userName);
             }
             default -> {
                 return null;

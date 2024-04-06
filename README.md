@@ -14,3 +14,6 @@
 
 ### Arithmetic Progression Game
 [![asciicast](https://asciinema.org/a/I1aI5mMYVJSWMUy09JOeBl6xT.svg)](https://asciinema.org/a/I1aI5mMYVJSWMUy09JOeBl6xT)
+
+### Prime Number Game
+[![asciicast](https://asciinema.org/a/bg8CXoZJYNYuE3L7IkQMgHWz6.svg)](https://asciinema.org/a/bg8CXoZJYNYuE3L7IkQMgHWz6)

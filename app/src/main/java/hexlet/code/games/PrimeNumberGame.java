@@ -4,12 +4,12 @@ import hexlet.code.AnswerValidator;
 import hexlet.code.Game;
 import hexlet.code.RandomGenerator;
 
-public class EvenNumberGame implements Game {
-    private static final String EVEN_GAME_RULES = "Answer 'yes' if the number is even, otherwise answer 'no'.";
+public class PrimeNumberGame implements Game {
+    private static final String EVEN_GAME_RULES = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
     private final String userName;
 
-    public EvenNumberGame(String userName) {
+    public PrimeNumberGame(String userName) {
         this.userName = userName;
     }
 
@@ -31,10 +31,20 @@ public class EvenNumberGame implements Game {
     }
 
     private String calculateCorrectAnswer(int givenNumber) {
-        return givenNumber % 2 == 0 ? YES : NO;
+        return isPrime(givenNumber) ? YES : NO;
+    }
+
+    private boolean isPrime(int number) {
+        for (int i = 2; i < number / 2 + 1; i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private int getNumberForQuestion() {
-        return RandomGenerator.generateInteger();
+        return RandomGenerator.generateInteger() + 2;
     }
 }

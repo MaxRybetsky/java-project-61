@@ -6,6 +6,9 @@ public interface Game {
     String WRONG_ANSWER_MESSAGE_TEMPLATE =
             "'%s' is wrong answer ;(. Correct answer was '%s'.\nLet's try again, %s!\n";
 
+    String YES = "yes";
+    String NO = "no";
+
     void printRules();
     boolean playRound();
 }
