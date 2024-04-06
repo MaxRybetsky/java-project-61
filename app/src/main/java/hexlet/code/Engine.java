@@ -89,7 +89,10 @@ public class Engine {
     private static String scanChosenOption() {
         var scanner = new Scanner(System.in);
 
-        return scanner.nextLine();
+        var option = scanner.nextLine();
+        System.out.println();
+
+        return option;
     }
 
     private static Game getGameForUserByOption(String userName, int optionNumber) {
