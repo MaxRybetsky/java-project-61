@@ -41,27 +41,28 @@ public class Engine {
             return;
         }
 
-        runGame(game);
-        printCongratulationsAfterPlaying(userName);
+        runGameForUser(game, userName);
     }
     private static boolean optionIsExit(int optionNumber) {
         return optionNumber == 0;
     }
 
-    private static void runGame(Game game) {
+    private static void runGameForUser(Game game, String userName) {
         game.printRules();
 
         var rightAnswersCount = 0;
 
         while (rightAnswersCount != NUMBER_OF_ROUNDS) {
-            var roundResult = game.playRound();
+            var roundSuccessful = game.playRound();
 
-            if (roundResult) {
+            if (roundSuccessful) {
                 rightAnswersCount++;
             } else {
-                rightAnswersCount = 0;
+                return;
             }
         }
+
+        printCongratulationsAfterPlaying(userName);
     }
 
     private static boolean gameWasNotChosen(Game game) {
