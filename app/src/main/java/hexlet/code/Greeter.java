@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Greeter {
     private static final String WELCOME_MESSAGE = "Welcome to the Brain Games!";
     private static final String NAME_QUESTION = "May I have your name? ";
-    private static final String GREETING_MESSAGE_TEMPLATE = "Hello, %s!\n";
+    private static final String GREETING_MESSAGE_TEMPLATE = "\nHello, %s!\n";
 
     public static String greetAndReturnUserName() {
         printGreeting();
