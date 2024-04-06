@@ -1,8 +1,8 @@
 package hexlet.code.games;
 
-import hexlet.code.AnswerValidator;
+import hexlet.code.validator.AnswerValidator;
 import hexlet.code.Game;
-import hexlet.code.RandomGenerator;
+import hexlet.code.random.RandomGenerator;
 
 public class ArithmeticProgressionGame implements Game {
     private static final String ARITHMETIC_PROGRESSION_GAME_RULES = "What number is missing in the progression?";

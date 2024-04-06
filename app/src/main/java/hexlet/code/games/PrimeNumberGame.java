@@ -1,8 +1,8 @@
 package hexlet.code.games;
 
-import hexlet.code.AnswerValidator;
+import hexlet.code.validator.AnswerValidator;
 import hexlet.code.Game;
-import hexlet.code.RandomGenerator;
+import hexlet.code.random.RandomGenerator;
 
 public class PrimeNumberGame implements Game {
     private static final String EVEN_GAME_RULES = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";

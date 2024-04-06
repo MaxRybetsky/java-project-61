@@ -1,8 +1,8 @@
 package hexlet.code.games;
 
-import hexlet.code.AnswerValidator;
+import hexlet.code.validator.AnswerValidator;
 import hexlet.code.Game;
-import hexlet.code.RandomGenerator;
+import hexlet.code.random.RandomGenerator;
 
 public class CalculatorGame implements Game {
     private static final String CALCULATOR_GAME_RULES = "What is the result of the expression?";

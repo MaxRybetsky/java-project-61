@@ -28,24 +28,24 @@ public class Engine {
 
     public static void startPlaying() {
         printOptions();
+        var option = scanChosenOptionNumber();
 
-        var optionNumber = scanOptionNumber();
-
-        if (optionNumber == 0) {
+        if (optionIsExit(option)) {
             return;
         }
 
-        var userName = Cli.greetAndReturnUserName();
-
-        var game = getGameForUserByOption(userName, optionNumber);
+        var userName = Greeter.greetAndReturnUserName();
+        var game = getGameForUserByOption(userName, option);
 
         if (gameWasNotChosen(game)) {
             return;
         }
 
         runGame(game);
-
         printCongratulationsAfterPlaying(userName);
+    }
+    private static boolean optionIsExit(int optionNumber) {
+        return optionNumber == 0;
     }
 
     private static void runGame(Game game) {
@@ -78,10 +78,18 @@ public class Engine {
         System.out.println(CHOICE_MESSAGE);
     }
 
-    private static int scanOptionNumber() {
+    private static int scanChosenOptionNumber() {
+        try {
+            return Integer.parseInt(scanChosenOption());
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private static String scanChosenOption() {
         var scanner = new Scanner(System.in);
 
-        return scanner.nextInt();
+        return scanner.nextLine();
     }
 
     private static Game getGameForUserByOption(String userName, int optionNumber) {

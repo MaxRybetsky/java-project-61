@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.validator;
 
 import java.util.Objects;
 import java.util.Scanner;
