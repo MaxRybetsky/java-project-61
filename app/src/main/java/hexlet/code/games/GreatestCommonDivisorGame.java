@@ -1,25 +1,19 @@
 package hexlet.code.games;
 
-import hexlet.code.validator.AnswerValidator;
 import hexlet.code.Game;
+import hexlet.code.data.GameRoundData;
 import hexlet.code.random.RandomGenerator;
 
-public class GreatestCommonDivisorGame implements Game {
+public final class GreatestCommonDivisorGame implements Game {
     private static final String GCD_GAME_RULES = "Find the greatest common divisor of given numbers.";
 
-    private final String userName;
-
-    public GreatestCommonDivisorGame(String userName) {
-        this.userName = userName;
+    @Override
+    public String getRules() {
+        return GCD_GAME_RULES;
     }
 
     @Override
-    public void printRules() {
-        System.out.println(GCD_GAME_RULES);
-    }
-
-    @Override
-    public boolean playRound() {
+    public GameRoundData initNewRound() {
         var firstNumber = generateInt();
         var secondNumber = generateInt();
 
@@ -27,7 +21,7 @@ public class GreatestCommonDivisorGame implements Game {
 
         var question = buildStringQuestion(firstNumber, secondNumber);
 
-        return AnswerValidator.askAndValidateIntegerAnswer(question, correctAnswer, userName);
+        return new GameRoundData(question, correctAnswer);
     }
 
     private int calculateGcdOf(int firstNumber, int secondNumber) {

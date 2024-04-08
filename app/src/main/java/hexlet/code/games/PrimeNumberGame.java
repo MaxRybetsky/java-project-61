@@ -1,33 +1,23 @@
 package hexlet.code.games;
 
-import hexlet.code.validator.AnswerValidator;
+import hexlet.code.data.GameRoundData;
 import hexlet.code.Game;
 import hexlet.code.random.RandomGenerator;
 
-public class PrimeNumberGame implements Game {
-    private static final String EVEN_GAME_RULES = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
+public final class PrimeNumberGame implements Game {
+    private static final String PRIME_GAME_RULES = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
-    private final String userName;
-
-    public PrimeNumberGame(String userName) {
-        this.userName = userName;
+    @Override
+    public String getRules() {
+        return PRIME_GAME_RULES;
     }
 
     @Override
-    public void printRules() {
-        System.out.println(EVEN_GAME_RULES);
-    }
-
-    @Override
-    public boolean playRound() {
+    public GameRoundData initNewRound() {
         var givenNumber = getNumberForQuestion();
         var correctAnswer = calculateCorrectAnswer(givenNumber);
 
-        return AnswerValidator.askAndValidateStringAnswer(
-                String.valueOf(givenNumber),
-                correctAnswer,
-                userName
-        );
+        return new GameRoundData(givenNumber, correctAnswer);
     }
 
     private String calculateCorrectAnswer(int givenNumber) {

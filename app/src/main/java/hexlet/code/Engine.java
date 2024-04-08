@@ -1,63 +1,60 @@
 package hexlet.code;
 
-import hexlet.code.games.ArithmeticProgressionGame;
-import hexlet.code.games.CalculatorGame;
-import hexlet.code.games.EvenNumberGame;
-import hexlet.code.games.GreatestCommonDivisorGame;
-import hexlet.code.games.PrimeNumberGame;
-
 import java.util.Objects;
-import java.util.Scanner;
+
+import static hexlet.code.OptionsHandler.getOption;
+import static hexlet.code.OptionsHandler.printOptions;
+import static hexlet.code.io.InputScanner.readLine;
+import static hexlet.code.io.Printer.printf;
+import static hexlet.code.io.Printer.printfLn;
+import static hexlet.code.io.Printer.println;
+import static hexlet.code.validator.AnswerValidator.validate;
 
 public class Engine {
-    private static final String ENTER_GAME_NUMBER_MESSAGE = "Please enter the game number and press Enter.";
-    private static final String CHOICE_MESSAGE = "Your choice: ";
-    private static final String CONGRATULATIONS_TEMPLATE = "Congratulations, %s!\n";
+    private static final String QUESTION_TEMPLATE = "Question: %s\nYour answer: ";
+    private static final String CORRECT_ANSWER_MESSAGE = "Correct!";
+    private static final String WRONG_ANSWER_MESSAGE_TEMPLATE =
+            "'%s' is wrong answer ;(. Correct answer was '%s'.\nLet's try again, %s!";
+    private static final String CONGRATULATIONS_TEMPLATE = "Congratulations, %s!";
 
     private static final int NUMBER_OF_ROUNDS = 3;
 
-    private static final String[] OPTIONS = {
-        "1 - Greet",
-        "2 - Even",
-        "3 - Calc",
-        "4 - GCD",
-        "5 - Progression",
-        "6 - Prime",
-        "0 - Exit"
-    };
-
     public static void startPlaying() {
         printOptions();
-        var option = scanChosenOptionNumber();
+        var option = getOption();
 
-        if (optionIsExit(option)) {
+        if (option.isExit()) {
             return;
         }
 
         var userName = Greeter.greetAndReturnUserName();
-        var game = getGameForUserByOption(userName, option);
-
-        if (gameWasNotChosen(game)) {
-            return;
-        }
+        var game = option.getGame();
 
         runGameForUser(game, userName);
     }
-    private static boolean optionIsExit(int optionNumber) {
-        return optionNumber == 0;
-    }
 
     private static void runGameForUser(Game game, String userName) {
-        game.printRules();
+        if (Objects.isNull(game)) {
+            return;
+        }
 
         var rightAnswersCount = 0;
 
-        while (rightAnswersCount != NUMBER_OF_ROUNDS) {
-            var roundSuccessful = game.playRound();
+        println(game.getRules());
 
-            if (roundSuccessful) {
+        while (rightAnswersCount != NUMBER_OF_ROUNDS) {
+            var roundData = game.initNewRound();
+
+            askQuestion(roundData.getQuestion());
+            var answer = readLine();
+
+            var answerIsCorrect = validate(answer, roundData.getCorrectAnswer());
+
+            if (answerIsCorrect) {
+                println(CORRECT_ANSWER_MESSAGE);
                 rightAnswersCount++;
             } else {
+                printfLn(WRONG_ANSWER_MESSAGE_TEMPLATE, answer, roundData.getCorrectAnswer(), userName);
                 return;
             }
         }
@@ -65,61 +62,11 @@ public class Engine {
         printCongratulationsAfterPlaying(userName);
     }
 
-    private static boolean gameWasNotChosen(Game game) {
-        return Objects.isNull(game);
-    }
-
-    private static void printOptions() {
-        System.out.println(ENTER_GAME_NUMBER_MESSAGE);
-
-        for (var option : OPTIONS) {
-            System.out.println(option);
-        }
-
-        System.out.print(CHOICE_MESSAGE);
-    }
-
-    private static int scanChosenOptionNumber() {
-        try {
-            return Integer.parseInt(scanChosenOption());
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    private static String scanChosenOption() {
-        var scanner = new Scanner(System.in);
-
-        var option = scanner.nextLine();
-        System.out.println();
-
-        return option;
-    }
-
-    private static Game getGameForUserByOption(String userName, int optionNumber) {
-        switch (optionNumber) {
-            case 2 -> {
-                return new EvenNumberGame(userName);
-            }
-            case 3 -> {
-                return new CalculatorGame(userName);
-            }
-            case 4 -> {
-                return new GreatestCommonDivisorGame(userName);
-            }
-            case 5 -> {
-                return new ArithmeticProgressionGame(userName);
-            }
-            case 6 -> {
-                return new PrimeNumberGame(userName);
-            }
-            default -> {
-                return null;
-            }
-        }
+    private static void askQuestion(String question) {
+        printf(QUESTION_TEMPLATE, question);
     }
 
     private static void printCongratulationsAfterPlaying(String userName) {
-        System.out.printf(CONGRATULATIONS_TEMPLATE, userName);
+        printfLn(CONGRATULATIONS_TEMPLATE, userName);
     }
 }

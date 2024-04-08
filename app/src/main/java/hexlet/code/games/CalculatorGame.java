@@ -1,10 +1,10 @@
 package hexlet.code.games;
 
-import hexlet.code.validator.AnswerValidator;
+import hexlet.code.data.GameRoundData;
 import hexlet.code.Game;
 import hexlet.code.random.RandomGenerator;
 
-public class CalculatorGame implements Game {
+public final class CalculatorGame implements Game {
     private static final String CALCULATOR_GAME_RULES = "What is the result of the expression?";
 
     private static final String PLUS = "+";
@@ -13,19 +13,13 @@ public class CalculatorGame implements Game {
 
     private static final String[] OPERATIONS = {PLUS, MINUS, MULTIPLY};
 
-    private final String userName;
-
-    public CalculatorGame(String userName) {
-        this.userName = userName;
+    @Override
+    public String getRules() {
+        return CALCULATOR_GAME_RULES;
     }
 
     @Override
-    public void printRules() {
-        System.out.println(CALCULATOR_GAME_RULES);
-    }
-
-    @Override
-    public boolean playRound() {
+    public GameRoundData initNewRound() {
         var firstOperand = generateInt();
         var secondOperand = generateInt();
         var operation = getRandomOperation();
@@ -34,7 +28,7 @@ public class CalculatorGame implements Game {
 
         var question = buildStringExpression(firstOperand, operation, secondOperand);
 
-        return AnswerValidator.askAndValidateIntegerAnswer(question, correctAnswer, userName);
+        return new GameRoundData(question, correctAnswer);
     }
 
     private String buildStringExpression(int first, String operation, int second) {

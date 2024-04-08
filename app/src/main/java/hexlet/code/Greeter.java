@@ -1,6 +1,9 @@
 package hexlet.code;
 
-import java.util.Scanner;
+import static hexlet.code.io.InputScanner.readLine;
+import static hexlet.code.io.Printer.print;
+import static hexlet.code.io.Printer.printfLn;
+import static hexlet.code.io.Printer.println;
 
 public class Greeter {
     private static final String WELCOME_MESSAGE = "Welcome to the Brain Games!";
@@ -11,7 +14,7 @@ public class Greeter {
         printGreeting();
 
         askName();
-        var userName = getNameFromInput();
+        var userName = readLine();
 
         sayHelloWithName(userName);
 
@@ -19,20 +22,14 @@ public class Greeter {
     }
 
     private static void printGreeting() {
-        System.out.println(WELCOME_MESSAGE);
+        println(WELCOME_MESSAGE);
     }
 
     private static void askName() {
-        System.out.print(NAME_QUESTION);
-    }
-
-    private static String getNameFromInput() {
-        var scanner = new Scanner(System.in);
-
-        return scanner.nextLine();
+        print(NAME_QUESTION);
     }
 
     private static void sayHelloWithName(String userName) {
-        System.out.printf(GREETING_MESSAGE_TEMPLATE, userName);
+        printfLn(GREETING_MESSAGE_TEMPLATE, userName);
     }
 }
