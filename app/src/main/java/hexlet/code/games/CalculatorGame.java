@@ -2,7 +2,7 @@ package hexlet.code.games;
 
 import hexlet.code.random.RandomGenerator;
 
-import static hexlet.code.Engine.ROUND_ARRAY_SIZE;
+import static hexlet.code.Engine.ROUNDS_ARRAY_SIZE;
 import static hexlet.code.Engine.ROUND_CONTENT_NUMBER;
 import static hexlet.code.Engine.runGame;
 
@@ -16,7 +16,7 @@ public final class CalculatorGame {
     private static final String[] OPERATIONS = {PLUS, MINUS, MULTIPLY};
 
     public static void play() {
-        var rounds = new String[ROUND_ARRAY_SIZE];
+        var rounds = new String[ROUNDS_ARRAY_SIZE];
 
         for (int i = 0; i < rounds.length; i += ROUND_CONTENT_NUMBER) {
             var firstOperand = generateInt();

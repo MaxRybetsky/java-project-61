@@ -13,7 +13,7 @@ import static hexlet.code.validator.AnswerValidator.answerIsNotValid;
 public class Engine {
     public static final int NUMBER_OF_ROUNDS = 3;
     public static final int ROUND_CONTENT_NUMBER = 2;
-    public static final int ROUND_ARRAY_SIZE = NUMBER_OF_ROUNDS * ROUND_CONTENT_NUMBER;
+    public static final int ROUNDS_ARRAY_SIZE = NUMBER_OF_ROUNDS * ROUND_CONTENT_NUMBER;
 
     private static final String QUESTION_TEMPLATE = "Question: %s\nYour answer: ";
     private static final String CORRECT_ANSWER_MESSAGE = "Correct!";
