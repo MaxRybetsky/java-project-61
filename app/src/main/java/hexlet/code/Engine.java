@@ -1,72 +1,56 @@
 package hexlet.code;
 
-import java.util.Objects;
-
-import static hexlet.code.OptionsHandler.getOption;
-import static hexlet.code.OptionsHandler.printOptions;
+import static hexlet.code.Greeter.GREETING_MESSAGE_TEMPLATE;
+import static hexlet.code.Greeter.NAME_QUESTION;
+import static hexlet.code.Greeter.WELCOME_MESSAGE;
 import static hexlet.code.io.InputScanner.readLine;
+import static hexlet.code.io.Printer.print;
 import static hexlet.code.io.Printer.printf;
 import static hexlet.code.io.Printer.printfLn;
 import static hexlet.code.io.Printer.println;
-import static hexlet.code.validator.AnswerValidator.validate;
+import static hexlet.code.validator.AnswerValidator.answerIsNotValid;
 
 public class Engine {
+    public static final int NUMBER_OF_ROUNDS = 3;
+    public static final int ROUND_CONTENT_NUMBER = 2;
+    public static final int ROUND_ARRAY_SIZE = NUMBER_OF_ROUNDS * ROUND_CONTENT_NUMBER;
+
     private static final String QUESTION_TEMPLATE = "Question: %s\nYour answer: ";
     private static final String CORRECT_ANSWER_MESSAGE = "Correct!";
     private static final String WRONG_ANSWER_MESSAGE_TEMPLATE =
             "'%s' is wrong answer ;(. Correct answer was '%s'.\nLet's try again, %s!";
     private static final String CONGRATULATIONS_TEMPLATE = "Congratulations, %s!";
 
-    private static final int NUMBER_OF_ROUNDS = 3;
+    public static void runGame(String rules, String[] rounds) {
+        var userName = greetAndReturnUserName();
+        println(rules);
 
-    public static void startPlaying() {
-        printOptions();
-        var option = getOption();
+        for (int i = 0; i < rounds.length; i += ROUND_CONTENT_NUMBER) {
+            var question = rounds[i];
+            var correctAnswer = rounds[i + 1];
 
-        if (option.isExit()) {
-            return;
-        }
+            printf(QUESTION_TEMPLATE, question);
 
-        var userName = Greeter.greetAndReturnUserName();
-        var game = option.getGame();
-
-        runGameForUser(game, userName);
-    }
-
-    private static void runGameForUser(Game game, String userName) {
-        if (Objects.isNull(game)) {
-            return;
-        }
-
-        var rightAnswersCount = 0;
-
-        println(game.getRules());
-
-        while (rightAnswersCount != NUMBER_OF_ROUNDS) {
-            var roundData = game.initNewRound();
-
-            askQuestion(roundData.getQuestion());
-            var answer = readLine();
-
-            var answerIsCorrect = validate(answer, roundData.getCorrectAnswer());
-
-            if (answerIsCorrect) {
-                println(CORRECT_ANSWER_MESSAGE);
-                rightAnswersCount++;
-            } else {
-                printfLn(WRONG_ANSWER_MESSAGE_TEMPLATE, answer, roundData.getCorrectAnswer(), userName);
+            var userAnswer = readLine();
+            if (answerIsNotValid(userAnswer, correctAnswer)) {
+                printfLn(WRONG_ANSWER_MESSAGE_TEMPLATE, userAnswer, correctAnswer, userName);
                 return;
+            } else {
+                println(CORRECT_ANSWER_MESSAGE);
             }
         }
 
-        printCongratulationsAfterPlaying(userName);
-    }
-
-    private static void askQuestion(String question) {
-        printf(QUESTION_TEMPLATE, question);
-    }
-
-    private static void printCongratulationsAfterPlaying(String userName) {
         printfLn(CONGRATULATIONS_TEMPLATE, userName);
+    }
+
+    private static String greetAndReturnUserName() {
+        println(WELCOME_MESSAGE);
+        print(NAME_QUESTION);
+
+        var userName = readLine();
+
+        printfLn(GREETING_MESSAGE_TEMPLATE, userName);
+
+        return userName;
     }
 }

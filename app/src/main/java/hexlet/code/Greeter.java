@@ -6,19 +6,17 @@ import static hexlet.code.io.Printer.printfLn;
 import static hexlet.code.io.Printer.println;
 
 public class Greeter {
-    private static final String WELCOME_MESSAGE = "Welcome to the Brain Games!";
-    private static final String NAME_QUESTION = "May I have your name? ";
-    private static final String GREETING_MESSAGE_TEMPLATE = "\nHello, %s!\n";
+    public static final String WELCOME_MESSAGE = "Welcome to the Brain Games!";
+    public static final String NAME_QUESTION = "May I have your name? ";
+    public static final String GREETING_MESSAGE_TEMPLATE = "\nHello, %s!\n";
 
-    public static String greetAndReturnUserName() {
+    public static void greet() {
         printGreeting();
 
         askName();
         var userName = readLine();
 
         sayHelloWithName(userName);
-
-        return userName;
     }
 
     private static void printGreeting() {

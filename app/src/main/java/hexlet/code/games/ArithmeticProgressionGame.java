@@ -1,35 +1,43 @@
 package hexlet.code.games;
 
-import hexlet.code.data.GameRoundData;
-import hexlet.code.Game;
 import hexlet.code.random.RandomGenerator;
 
-public final class ArithmeticProgressionGame implements Game {
+import static hexlet.code.Engine.ROUND_ARRAY_SIZE;
+import static hexlet.code.Engine.ROUND_CONTENT_NUMBER;
+import static hexlet.code.Engine.runGame;
+
+public final class ArithmeticProgressionGame {
     private static final String ARITHMETIC_PROGRESSION_GAME_RULES = "What number is missing in the progression?";
 
     private static final int DEFAULT_BOUND_VALUE = 20;
     private static final int PROGRESSION_LENGTH = 10;
 
-    @Override
-    public String getRules() {
+    public static void play() {
+        var rounds = new String[ROUND_ARRAY_SIZE];
+
+        for (int i = 0; i < rounds.length; i += ROUND_CONTENT_NUMBER) {
+            var progressionElements = generateProgression();
+
+            var indexForQuestion = generateInt(PROGRESSION_LENGTH);
+            var correctAnswer = progressionElements[indexForQuestion];
+            var question = buildStringQuestion(progressionElements, indexForQuestion);
+
+            rounds[i] = question;
+            rounds[i + 1] = String.valueOf(correctAnswer);
+        }
+
+        runGame(getRules(), rounds);
+    }
+
+    private static String getRules() {
         return ARITHMETIC_PROGRESSION_GAME_RULES;
     }
 
-    @Override
-    public GameRoundData initNewRound() {
+
+    private static int[] generateProgression() {
         var firstElement = generateInt(DEFAULT_BOUND_VALUE);
         var delta = generateInt(DEFAULT_BOUND_VALUE);
 
-        var progressionElements = generateProgression(firstElement, delta);
-
-        var indexForQuestion = generateInt(PROGRESSION_LENGTH);
-        var correctAnswer = progressionElements[indexForQuestion];
-        var question = buildStringQuestion(progressionElements, indexForQuestion);
-
-        return new GameRoundData(question, correctAnswer);
-    }
-
-    private int[] generateProgression(int firstElement, int delta) {
         var progression = new int[PROGRESSION_LENGTH];
         progression[0] = firstElement;
 
@@ -40,7 +48,7 @@ public final class ArithmeticProgressionGame implements Game {
         return progression;
     }
 
-    private String buildStringQuestion(int[] progression, int indexQuestion) {
+    private static String buildStringQuestion(int[] progression, int indexQuestion) {
         var stringBuilder = new StringBuilder();
 
         for (int i = 0; i < PROGRESSION_LENGTH; i++) {
@@ -58,7 +66,7 @@ public final class ArithmeticProgressionGame implements Game {
         return stringBuilder.toString();
     }
 
-    private int generateInt(int bound) {
+    private static int generateInt(int bound) {
         return RandomGenerator.generateIntegerUpTo(bound);
     }
 }
