@@ -1,13 +1,15 @@
 package hexlet.code.games;
 
-import hexlet.code.random.RandomGenerator;
-
-import static hexlet.code.Engine.ROUNDS_ARRAY_SIZE;
+import static hexlet.code.Engine.NUMBER_OF_ROUNDS;
 import static hexlet.code.Engine.ROUND_CONTENT_NUMBER;
 import static hexlet.code.Engine.runGame;
+import static hexlet.code.random.RandomGenerator.generateIntegerFromRange;
 
 public final class CalculatorGame {
     private static final String CALCULATOR_GAME_RULES = "What is the result of the expression?";
+
+    private static final int MIN_VALUE = 0;
+    private static final int MAX_VALUE = 20;
 
     private static final String PLUS = "+";
     private static final String MINUS = "-";
@@ -16,19 +18,19 @@ public final class CalculatorGame {
     private static final String[] OPERATIONS = {PLUS, MINUS, MULTIPLY};
 
     public static void play() {
-        var rounds = new String[ROUNDS_ARRAY_SIZE];
+        var rounds = new String[NUMBER_OF_ROUNDS][ROUND_CONTENT_NUMBER];
 
-        for (int i = 0; i < rounds.length; i += ROUND_CONTENT_NUMBER) {
-            var firstOperand = generateInt();
-            var secondOperand = generateInt();
+        for (var round : rounds) {
+            var firstOperand = generateIntegerFromRange(MIN_VALUE, MAX_VALUE);
+            var secondOperand = generateIntegerFromRange(MIN_VALUE, MAX_VALUE);
             var operation = getRandomOperation();
 
             var correctAnswer = calculateCorrectAnswer(operation, firstOperand, secondOperand);
 
             var question = buildStringExpression(firstOperand, operation, secondOperand);
 
-            rounds[i] = question;
-            rounds[i + 1] = String.valueOf(correctAnswer);
+            round[0] = question;
+            round[1] = String.valueOf(correctAnswer);
         }
 
         runGame(getRules(), rounds);
@@ -44,7 +46,7 @@ public final class CalculatorGame {
     }
 
     private static String getRandomOperation() {
-        var indexOfOperation = RandomGenerator.generateIntegerUpTo(OPERATIONS.length);
+        var indexOfOperation = generateIntegerFromRange(MIN_VALUE, OPERATIONS.length - 1);
         return OPERATIONS[indexOfOperation];
     }
 
@@ -56,13 +58,10 @@ public final class CalculatorGame {
             case MINUS -> {
                 return first - second;
             }
-            default -> {
+            case MULTIPLY -> {
                 return first * second;
             }
+            default -> throw new RuntimeException("There is unknown operation: " + operation);
         }
-    }
-
-    private static int generateInt() {
-        return RandomGenerator.generateInteger();
     }
 }

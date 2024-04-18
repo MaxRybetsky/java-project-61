@@ -1,26 +1,28 @@
 package hexlet.code.games;
 
-import hexlet.code.random.RandomGenerator;
-
-import static hexlet.code.Engine.ROUNDS_ARRAY_SIZE;
+import static hexlet.code.Engine.NUMBER_OF_ROUNDS;
 import static hexlet.code.Engine.ROUND_CONTENT_NUMBER;
 import static hexlet.code.Engine.runGame;
+import static hexlet.code.random.RandomGenerator.generateIntegerFromRange;
 
 public final class GreatestCommonDivisorGame {
     private static final String GCD_GAME_RULES = "Find the greatest common divisor of given numbers.";
 
-    public static void play() {
-        var rounds = new String[ROUNDS_ARRAY_SIZE];
+    private static final int MIN_VALUE = 2;
+    private static final int MAX_VALUE = 99;
 
-        for (int i = 0; i < rounds.length; i += ROUND_CONTENT_NUMBER) {
-            var firstNumber = generateInt();
-            var secondNumber = generateInt();
+    public static void play() {
+        var rounds = new String[NUMBER_OF_ROUNDS][ROUND_CONTENT_NUMBER];
+
+        for (var round : rounds) {
+            var firstNumber = generateIntegerFromRange(MIN_VALUE, MAX_VALUE);
+            var secondNumber = generateIntegerFromRange(MIN_VALUE, MAX_VALUE);
 
             var correctAnswer = calculateGcdOf(firstNumber, secondNumber);
             var question = buildStringQuestion(firstNumber, secondNumber);
 
-            rounds[i] = question;
-            rounds[i + 1] = String.valueOf(correctAnswer);
+            round[0] = question;
+            round[1] = String.valueOf(correctAnswer);
         }
 
         runGame(getRules(), rounds);
@@ -47,9 +49,5 @@ public final class GreatestCommonDivisorGame {
 
     private static String buildStringQuestion(int first, int second) {
         return first + " " + second;
-    }
-
-    private static int generateInt() {
-        return RandomGenerator.generateInteger();
     }
 }
