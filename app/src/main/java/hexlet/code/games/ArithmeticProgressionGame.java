@@ -51,14 +51,14 @@ public final class ArithmeticProgressionGame {
     private static String buildStringQuestion(int[] progression, int indexQuestion) {
         var stringBuilder = new StringBuilder();
 
-        for (int i = 0; i < PROGRESSION_LENGTH; i++) {
+        for (int i = 0; i < progression.length; i++) {
             if (i == indexQuestion) {
                 stringBuilder.append("..");
             } else {
                 stringBuilder.append(progression[i]);
             }
 
-            if (i != PROGRESSION_LENGTH - 1) {
+            if (i != progression.length - 1) {
                 stringBuilder.append(" ");
             }
         }
