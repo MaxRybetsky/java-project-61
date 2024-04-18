@@ -1,7 +1,7 @@
 package hexlet.code.games;
 
 import static hexlet.code.Engine.NUMBER_OF_ROUNDS;
-import static hexlet.code.Engine.ROUND_CONTENT_NUMBER;
+import static hexlet.code.Engine.NUMBER_OF_ROUND_CONTENT;
 import static hexlet.code.Engine.runGame;
 import static hexlet.code.random.RandomGenerator.generateIntegerFromRange;
 
@@ -15,7 +15,7 @@ public final class EvenNumberGame {
     private static final String NO = "no";
 
     public static void play() {
-        var rounds = new String[NUMBER_OF_ROUNDS][ROUND_CONTENT_NUMBER];
+        var rounds = new String[NUMBER_OF_ROUNDS][NUMBER_OF_ROUND_CONTENT];
 
         for (var round : rounds) {
             var givenNumber = generateIntegerFromRange(MIN_VALUE, MAX_VALUE);
